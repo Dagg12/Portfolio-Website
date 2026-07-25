@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Vhukhudo Kevin Thamaga - Software Developer Portfolio. BSc IT student passionate about Full Stack Development, Cybersecurity, Networking, and AI." />
+    <meta name="keywords" content="Software Developer, Full Stack Developer, Cybersecurity, Networking, BSc IT, Portfolio" />
+    <meta name="author" content="Vhukhudo Kevin Thamaga" />
+    <meta name="theme-color" content="#2563EB" />
+    <meta property="og:title" content="Vhukhudo Kevin Thamaga - Software Developer" />
+    <meta property="og:description" content="Professional portfolio of Vhukhudo Kevin Thamaga, BSc IT student and software developer." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dagg12.github.io/portfolio/" />
+    <meta name="robots" content="index, follow" />
+
+    <title>Vhukhudo Kevin Thamaga | Software Developer Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <p class="loader-text">Loading<span class="loader-dots">...</span></p>
+        </div>
+    </div>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- BACK TO TOP -->
+    <button id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- CUSTOM CURSOR (desktop) -->
+    <div id="customCursor" class="custom-cursor" aria-hidden="true"></div>
+    <div id="customCursorDot" class="custom-cursor-dot" aria-hidden="true"></div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="#home" aria-label="Home">
+                    <span class="logo-text">&lt;<span class="highlight">V</span>KT /&gt;</span>
+                </a>
+            </div>
+
+            <ul class="nav-links" id="navLinks" role="menubar">
+                <li role="none"><a href="#home" role="menuitem" class="active">Home</a></li>
+                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#skills" role="menuitem">Skills</a></li>
+                <li role="none"><a href="#projects" role="menuitem">Projects</a></li>
+                <li role="none"><a href="#experience" role="menuitem">Experience</a></li>
+                <li role="none"><a href="#education" role="menuitem">Education</a></li>
+                <li role="none"><a href="#certificates" role="menuitem">Certificates</a></li>
+                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger" class="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN ===== -->
+    <main>
+
+        <!-- ===== HERO ===== -->
+        <section id="home" class="hero-section" aria-label="Hero introduction">
+            <!-- Matrix Rain Background -->
+            <canvas id="matrixCanvas" class="matrix-background" aria-hidden="true"></canvas>
+
+            <div class="container hero-content">
+                <div class="hero-grid">
+                    <div class="hero-text" data-aos="fade-right" data-aos-duration="1200">
+                        <div class="hero-greeting">
+                            <span class="greeting-wave">👋</span>
+                            <span class="greeting-text">Hello, I'm</span>
+                        </div>
+                        <h1 class="hero-name">
+                            Vhukhudo <span class="highlight">Kevin</span> Thamaga
+                        </h1>
+                        <div class="hero-typed-wrapper">
+                            <span class="hero-prefix">I am a</span>
+                            <span id="typed-text" class="hero-typed"></span>
+                        </div>
+                        <p class="hero-description">
+                            Final-year BSc Information Technology student at North-West University.
+                            Passionate about Software Development, Cybersecurity, Networking, and AI.
+                            I build secure, scalable solutions that solve real-world problems.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="https://wa.me/27678468311" target="_blank" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Hire Me
+                            </a>
+                            <a href="#projects" class="btn btn-outline">
+                                <i class="fas fa-code"></i> View Projects
+                            </a>
+                            <a href="#" class="btn btn-ghost" id="downloadCV">
+                                <i class="fas fa-download"></i> Download CV
+                            </a>
+                        </div>
+                        <div class="hero-social">
+                            <a href="https://github.com/Dagg12" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/thamaga-kevin-936598365" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="mailto:thamagakevin12@gmail.com" aria-label="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="tel:+27678468311" aria-label="Phone">
+                                <i class="fas fa-phone-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="hero-image-wrapper" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                        <div class="hero-image-container">
+                            <div class="hero-image-glow"></div>
+                            <div class="hero-image">
+                                <img src="assets/images/profile.jpg" alt="Vhukhudo Kevin Thamaga - Profile Photo" />
+                            </div>
+                            <div class="floating-badge badge-1">
+                                <i class="fas fa-code"></i>
+                                <span>Full Stack</span>
+                            </div>
+                            <div class="floating-badge badge-2">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Cybersecurity</span>
+                            </div>
+                            <div class="floating-badge badge-3">
+                                <i class="fas fa-network-wired"></i>
+                                <span>Networking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-indicator" aria-hidden="true">
+                <span>Scroll</span>
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT ===== -->
+        <section id="about" class="section about-section" aria-label="About me">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">About Me</span>
+                    <h2 class="section-title">Who <span class="highlight">I Am</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-content" data-aos="fade-right" data-aos-delay="100">
+                        <p class="about-intro">
+                            I am a <strong>final-year Bachelor of Science in Information Technology</strong> student at
+                            <strong>North-West University</strong>, driven by a deep passion for
+                            <strong>Software Development</strong>, <strong>Cybersecurity</strong>,
+                            <strong>Networking</strong>, <strong>Database Systems</strong>, and
+                            <strong>Artificial Intelligence</strong>.
+                        </p>
+                        <p>
+                            I thrive on solving complex, real-world problems through innovative technology solutions.
+                            Whether it's architecting a full-stack web application, securing a network infrastructure,
+                            or exploring the frontiers of AI, I approach every challenge with curiosity and determination.
+                        </p>
+                        <p>
+                            My journey in tech is fueled by a commitment to <strong>continuous learning</strong> and
+                            staying at the forefront of modern technologies. I believe in writing clean, efficient code
+                            and building systems that make a tangible difference in people's lives.
+                        </p>
+                        <div class="about-stats" data-aos="fade-up" data-aos-delay="200">
+                            <div class="about-stat">
+                                <span class="stat-number" data-count="3">0</span>
+                                <span class="stat-label">Projects Completed</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="stat-number" data-count="45">0</span>
+                                <span class="stat-label">Technologies Learned</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="stat-number" data-count="15">0</span>
+                                <span class="stat-label">GitHub Repositories</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="stat-number" data-count="5">0</span>
+                                <span class="stat-label">Years of Learning</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-image" data-aos="fade-left" data-aos-delay="150">
+                        <div class="about-image-wrapper">
+                            <div class="about-image-inner">
+                                <img src="assets/images/profile.jpg" alt="Vhukhudo Kevin Thamaga" />
+                            </div>
+                            <div class="about-experience-badge">
+                                <span class="exp-number">5+</span>
+                                <span class="exp-label">Years Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SKILLS ===== -->
+        <section id="skills" class="section skills-section" aria-label="Technical skills">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">My Skills</span>
+                    <h2 class="section-title">Technical <span class="highlight">Proficiencies</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- Programming -->
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="50">
+                        <h3 class="skill-category-title"><i class="fas fa-laptop-code"></i> Programming</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fab fa-html5"></i> HTML5</span><span class="skill-percentage">90%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fab fa-css3-alt"></i> CSS3</span><span class="skill-percentage">85%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fab fa-js"></i> JavaScript</span><span class="skill-percentage">80%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fab fa-java"></i> Java</span><span class="skill-percentage">75%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fas fa-database"></i> SQL</span><span class="skill-percentage">80%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fab fa-microsoft"></i> C#</span><span class="skill-percentage">70%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Database -->
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="skill-category-title"><i class="fas fa-database"></i> Database</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fas fa-database"></i> MySQL</span><span class="skill-percentage">85%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fas fa-fire"></i> Firebase</span><span class="skill-percentage">75%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Networking -->
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="150">
+                        <h3 class="skill-category-title"><i class="fas fa-network-wired"></i> Networking</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fas fa-code-branch"></i> Cisco Packet Tracer</span><span class="skill-percentage">80%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fas fa-server"></i> DHCP / DNS</span><span class="skill-percentage">75%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fas fa-route"></i> Routing & Switching</span><span class="skill-percentage">70%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fas fa-shield-virus"></i> Firewall / VLANs</span><span class="skill-percentage">65%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="65"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="skill-category-title"><i class="fas fa-tools"></i> Tools & Platforms</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fab fa-git-alt"></i> Git / GitHub</span><span class="skill-percentage">85%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fas fa-code"></i> VS Code</span><span class="skill-percentage">90%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fab fa-microsoft"></i> Visual Studio</span><span class="skill-percentage">75%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name"><i class="fas fa-database"></i> MySQL Workbench</span><span class="skill-percentage">80%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PROJECTS ===== -->
+        <section id="projects" class="section projects-section" aria-label="Projects">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">Portfolio</span>
+                    <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1: Centalytics (Hospital) -->
+                    <div class="project-card" data-aos="flip-up" data-aos-delay="100">
+                        <div class="project-card-inner">
+                            <div class="project-image">
+                                <img src="assets/images/hospital.png" alt="Centalytics - Hospital Management System" loading="lazy" />
+                                <div class="project-overlay"><span class="project-type">Full Stack</span></div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Centalytics – Hospital Management System</h3>
+                                <p class="project-description">
+                                    A comprehensive full‑stack hospital management system with Firebase backend.
+                                    Features patient management, doctor scheduling, appointments, authentication,
+                                    medical records, and an intuitive dashboard.
+                                </p>
+                                <div class="project-tech">
+                                    <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Firebase</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/Dagg12/Centalytics" target="_blank" rel="noopener noreferrer" class="project-link github-link">
+                                        <i class="fab fa-github"></i> Code
+                                    </a>
+                                    <a href="https://centalytics-cef6c.web.app" target="_blank" rel="noopener noreferrer" class="project-link demo-link">
+                                        <i class="fas fa-external-link-alt"></i> Live Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: ClinicalBloodBank -->
+                    <div class="project-card" data-aos="flip-up" data-aos-delay="150">
+                        <div class="project-card-inner">
+                            <div class="project-image">
+                                <img src="assets/images/bloodbank.png" alt="ClinicalBloodBank - Blood Bank Management System" loading="lazy" />
+                                <div class="project-overlay"><span class="project-type">Web</span></div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">ClinicalBloodBank – Blood Bank Management</h3>
+                                <p class="project-description">
+                                    ASP.NET Web Forms application for managing blood inventory, donor records,
+                                    hospital requests, and real‑time blood stock tracking with secure authentication.
+                                </p>
+                                <div class="project-tech">
+                                    <span>C#</span><span>ASP.NET</span><span>MySQL</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/TeeCee07/ClinicalBloodBank" target="_blank" rel="noopener noreferrer" class="project-link github-link">
+                                        <i class="fab fa-github"></i> Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: CruizeControlRentalCars -->
+                    <div class="project-card" data-aos="flip-up" data-aos-delay="200">
+                        <div class="project-card-inner">
+                            <div class="project-image">
+                                <img src="assets/images/carrental.png" alt="CruizeControlRentalCars - Car Rental System" loading="lazy" />
+                                <div class="project-overlay"><span class="project-type">Web</span></div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">CruizeControlRentalCars – Car Rental System</h3>
+                                <p class="project-description">
+                                    A web application for managing car inventory, customer reservations,
+                                    rental tracking, and billing, built with HTML, CSS, JavaScript, and MySQL.
+                                </p>
+                                <div class="project-tech">
+                                    <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>MySQL</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/TeeCee07/CruizeControlRentalCars" target="_blank" rel="noopener noreferrer" class="project-link github-link">
+                                        <i class="fab fa-github"></i> Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Portfolio -->
+                    <div class="project-card" data-aos="flip-up" data-aos-delay="250">
+                        <div class="project-card-inner">
+                            <div class="project-image">
+                                <img src="assets/images/portfolio.png" alt="Personal Portfolio Website" loading="lazy" />
+                                <div class="project-overlay"><span class="project-type">Web</span></div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Personal Portfolio Website</h3>
+                                <p class="project-description">
+                                    A fully responsive, modern portfolio website built from scratch with HTML, CSS,
+                                    and JavaScript. Features glassmorphism, dark mode, animations, and a professional
+                                    design aesthetic.
+                                </p>
+                                <div class="project-tech">
+                                    <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/Dagg12/portfolio" target="_blank" rel="noopener noreferrer" class="project-link github-link">
+                                        <i class="fab fa-github"></i> Code
+                                    </a>
+                                    <a href="#" target="_blank" rel="noopener noreferrer" class="project-link demo-link">
+                                        <i class="fas fa-external-link-alt"></i> Live Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== EXPERIENCE ===== -->
+        <section id="experience" class="section experience-section" aria-label="Work experience">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">Experience</span>
+                    <h2 class="section-title">Work <span class="highlight">History</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="timeline-dot"><i class="fas fa-briefcase"></i></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3 class="timeline-title">Freelance IT Technician</h3>
+                                <span class="timeline-date">2024 – Present</span>
+                            </div>
+                            <h4 class="timeline-company">THAMAS TECH WORLD</h4>
+                            <ul class="timeline-list">
+                                <li><i class="fas fa-check-circle"></i> WiFi installation and network configuration for residential and small business clients</li>
+                                <li><i class="fas fa-check-circle"></i> Computer repair, maintenance, and hardware troubleshooting</li>
+                                <li><i class="fas fa-check-circle"></i> Website development and hosting for local businesses</li>
+                                <li><i class="fas fa-check-circle"></i> Technical support and IT consulting services</li>
+                                <li><i class="fas fa-check-circle"></i> Security camera (CCTV) installation and configuration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== EDUCATION ===== -->
+        <section id="education" class="section education-section" aria-label="Education">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">Education</span>
+                    <h2 class="section-title">Academic <span class="highlight">Journey</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="timeline-dot"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3 class="timeline-title">Bachelor of Science in Information Technology</h3>
+                                <span class="timeline-date">2022 – 2026</span>
+                            </div>
+                            <h4 class="timeline-company">North-West University, South Africa</h4>
+                            <p class="timeline-description">
+                                Comprehensive IT program covering software development, networking, database systems,
+                                web development, and information security.
+                            </p>
+                            <div class="timeline-modules">
+                                <span class="module-tag">Software Engineering</span>
+                                <span class="module-tag">Networking</span>
+                                <span class="module-tag">Database Systems</span>
+                                <span class="module-tag">Web Development</span>
+                                <span class="module-tag">Information Security</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CERTIFICATES ===== -->
+        <section id="certificates" class="section certificates-section" aria-label="Certificates">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">Certifications</span>
+                    <h2 class="section-title">Professional <span class="highlight">Certificates</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="certificates-grid">
+                    <div class="certificate-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="certificate-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="certificate-content">
+                            <h3 class="certificate-title">Cisco Networking Academy Program</h3>
+                            <p class="certificate-issuer">Cisco Networking Academy</p>
+                            <span class="certificate-date">Jan 2026 – Mar 2026</span>
+                            <p class="certificate-desc">Short Course Certificate – Introductory NQF Level 5</p>
+                            <div class="certificate-credential">
+                                <i class="fas fa-credential"></i>
+                                <span>Credential ID: CISCO-INTRO-2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== GITHUB ===== -->
+        <section id="github" class="section github-section" aria-label="GitHub">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">Open Source</span>
+                    <h2 class="section-title">GitHub <span class="highlight">Repositories</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="github-content" data-aos="fade-up" data-aos-delay="100">
+                    <div class="github-profile">
+                        <div class="github-avatar">
+                            <img src="https://ui-avatars.com/api/?name=Thamaga+Vhukhudo+Kevin&size=120&background=2563EB&color=fff&bold=true" alt="GitHub Avatar" />
+                        </div>
+                        <div class="github-info">
+                            <h3 class="github-username">Thamaga-Vhukhudo-Kevin</h3>
+                            <p class="github-bio">Final-year BSc IT student · Software Developer · Cybersecurity Enthusiast</p>
+                            <div class="github-stats">
+                                <span><i class="fas fa-code-fork"></i> 12 Repositories</span>
+                                <span><i class="fas fa-star"></i> 8 Stars</span>
+                                <span><i class="fas fa-users"></i> 3 Followers</span>
+                            </div>
+                            <a href="https://github.com/Dagg12" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                <i class="fab fa-github"></i> Visit GitHub Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="github-repos" id="githubRepos">
+                        <p class="repos-loading"><i class="fas fa-spinner fa-spin"></i> Loading repositories...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT ===== -->
+        <section id="contact" class="section contact-section" aria-label="Contact">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag">Get In Touch</span>
+                    <h2 class="section-title">Contact <span class="highlight">Me</span></h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info" data-aos="fade-right" data-aos-delay="100">
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-card-content">
+                                <h4>Email</h4>
+                                <a href="mailto:thamagakevin12@gmail.com">thamagakevin12@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="contact-card-content">
+                                <h4>Phone</h4>
+                                <a href="tel:+27678468311">+27 67 846 8311</a>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-card-content">
+                                <h4>Location</h4>
+                                <p>Vereeniging, Gauteng, South Africa</p>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fab fa-github"></i></div>
+                            <div class="contact-card-content">
+                                <h4>GitHub</h4>
+                                <a href="https://github.com/Dagg12" target="_blank" rel="noopener noreferrer">github.com/Dagg12</a>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fab fa-linkedin-in"></i></div>
+                            <div class="contact-card-content">
+                                <h4>LinkedIn</h4>
+                                <a href="https://www.linkedin.com/in/thamaga-kevin-936598365" target="_blank" rel="noopener noreferrer">linkedin.com/in/thamaga-kevin-936598365</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-wrapper" data-aos="fade-left" data-aos-delay="150">
+                        <form id="contactForm" class="contact-form" action="#" method="POST" novalidate>
+                            <div class="form-group">
+                                <label for="formName">Your Name</label>
+                                <input type="text" id="formName" placeholder="John Doe" required />
+                                <span class="form-error">Please enter your name</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="formEmail">Your Email</label>
+                                <input type="email" id="formEmail" placeholder="john@example.com" required />
+                                <span class="form-error">Please enter a valid email</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="formSubject">Subject</label>
+                                <input type="text" id="formSubject" placeholder="Project Inquiry" />
+                            </div>
+                            <div class="form-group">
+                                <label for="formMessage">Message</label>
+                                <textarea id="formMessage" rows="5" placeholder="Tell me about your project..." required></textarea>
+                                <span class="form-error">Please enter your message</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                            <div id="formStatus" class="form-status"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">&lt;<span class="highlight">V</span>KT /&gt;</div>
+                    <p class="footer-bio">
+                        Building secure, scalable solutions that solve real-world problems.
+                        Final-year BSc IT student passionate about full-stack development,
+                        cybersecurity, and networking.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#certificates">Certificates</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="footer-social-icons">
+                        <a href="https://github.com/Dagg12" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/thamaga-kevin-936598365" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:thamagakevin12@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+27678468311" aria-label="Phone"><i class="fas fa-phone-alt"></i></a>
+                        <a href="#" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    &copy; <span id="currentYear">2026</span> Vhukhudo Kevin Thamaga.
+                    Built with <i class="fas fa-heart" style="color: #22C55E;"></i> and <i class="fas fa-mug-saucer"></i>
+                </p>
+                <p class="footer-tech">HTML5 · CSS3 · JavaScript · AOS · Typed.js · Matrix Rain</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EXTERNAL SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- No particles.js – replaced by matrix rain -->
+    <script src="script.js"></script>
+</body>
+</html>
