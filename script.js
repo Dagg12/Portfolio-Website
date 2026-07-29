@@ -88,7 +88,6 @@ if (typeof Typed !== 'undefined') {
             const x = i * 18;
             const y = drops[i] * 18;
 
-            // Brightness varies
             const brightness = Math.random() * 0.6 + 0.4;
             const color = `rgba(37, 99, 235, ${brightness})`;
             ctx.fillStyle = color;
@@ -105,7 +104,6 @@ if (typeof Typed !== 'undefined') {
 
     drawMatrix();
 
-    // Pause animation when not visible for performance
     let isVisible = true;
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -450,32 +448,6 @@ if (typeof Typed !== 'undefined') {
 })();
 
 /* ====================================================
-   DOWNLOAD CV (Placeholder)
-   ==================================================== */
-(function initDownloadCV() {
-    const btn = document.getElementById('downloadCV');
-    if (!btn) return;
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const status = document.createElement('div');
-        status.style.cssText = `
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: var(--primary); color: white; padding: 0.75rem 1.5rem;
-            border-radius: 8px; font-weight: 600; z-index: 9999;
-            box-shadow: 0 8px 24px rgba(37,99,235,0.4);
-            animation: fadeInUp 0.4s ease;
-        `;
-        status.textContent = '📄 CV download will be available once you upload your PDF.';
-        document.body.appendChild(status);
-        setTimeout(() => {
-            status.style.opacity = '0';
-            status.style.transition = 'opacity 0.4s';
-            setTimeout(() => status.remove(), 400);
-        }, 3500);
-    });
-})();
-
-/* ====================================================
    SMOOTH SCROLL (fallback)
    ==================================================== */
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -522,6 +494,9 @@ document.querySelectorAll('form').forEach((form) => {
     });
 });
 
+/* ====================================================
+   CONSOLE WELCOME
+   ==================================================== */
 console.log('%c🚀 Vhukhudo Kevin Thamaga - Portfolio', 'font-size: 24px; font-weight: bold; color: #2563EB;');
 console.log('%cBuilt with ❤️ using HTML, CSS & JavaScript + Matrix Rain', 'font-size: 14px; color: #64748b;');
 console.log('%chttps://github.com/Dagg12', 'font-size: 12px; color: #22C55E;');
