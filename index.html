@@ -6,7 +6,7 @@
     <meta name="description" content="Vhukhudo Kevin Thamaga - Software Developer Portfolio. BSc IT student passionate about Full Stack Development, Cybersecurity, Networking, and AI." />
     <meta name="keywords" content="Software Developer, Full Stack Developer, Cybersecurity, Networking, BSc IT, Portfolio" />
     <meta name="author" content="Vhukhudo Kevin Thamaga" />
-    <meta name="theme-color" content="#2563EB" />
+    <meta name="theme-color" content="#0F172A" />
     <meta property="og:title" content="Vhukhudo Kevin Thamaga - Software Developer" />
     <meta property="og:description" content="Professional portfolio of Vhukhudo Kevin Thamaga, BSc IT student and software developer." />
     <meta property="og:type" content="website" />
@@ -164,6 +164,9 @@
 
         <!-- ===== ABOUT ===== -->
         <section id="about" class="section about-section" aria-label="About me">
+            <!-- Matrix Rain Background -->
+            <canvas id="matrixCanvasAbout" class="matrix-background" aria-hidden="true"></canvas>
+
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <span class="section-tag">About Me</span>
@@ -227,6 +230,9 @@
 
         <!-- ===== SKILLS ===== -->
         <section id="skills" class="section skills-section" aria-label="Technical skills">
+            <!-- Matrix Rain Background -->
+            <canvas id="matrixCanvasSkills" class="matrix-background" aria-hidden="true"></canvas>
+
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <span class="section-tag">My Skills</span>
@@ -332,6 +338,9 @@
 
         <!-- ===== PROJECTS ===== -->
         <section id="projects" class="section projects-section" aria-label="Projects">
+            <!-- Matrix Rain Background -->
+            <canvas id="matrixCanvasProjects" class="matrix-background" aria-hidden="true"></canvas>
+
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <span class="section-tag">Portfolio</span>
@@ -482,6 +491,9 @@
 
         <!-- ===== EXPERIENCE ===== -->
         <section id="experience" class="section experience-section" aria-label="Work experience">
+            <!-- Matrix Rain Background -->
+            <canvas id="matrixCanvasExperience" class="matrix-background" aria-hidden="true"></canvas>
+
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <span class="section-tag">Experience</span>
@@ -518,6 +530,9 @@
 
         <!-- ===== EDUCATION ===== -->
         <section id="education" class="section education-section" aria-label="Education">
+            <!-- Matrix Rain Background -->
+            <canvas id="matrixCanvasEducation" class="matrix-background" aria-hidden="true"></canvas>
+
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <span class="section-tag">Education</span>
@@ -576,6 +591,9 @@
 
         <!-- ===== CERTIFICATES ===== -->
         <section id="certificates" class="section certificates-section" aria-label="Certificates">
+            <!-- Matrix Rain Background -->
+            <canvas id="matrixCanvasCertificates" class="matrix-background" aria-hidden="true"></canvas>
+
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <span class="section-tag">Certifications</span>
@@ -605,6 +623,9 @@
 
         <!-- ===== GITHUB ===== -->
         <section id="github" class="section github-section" aria-label="GitHub">
+            <!-- Matrix Rain Background -->
+            <canvas id="matrixCanvasGithub" class="matrix-background" aria-hidden="true"></canvas>
+
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <span class="section-tag">Open Source</span>
@@ -640,6 +661,9 @@
 
         <!-- ===== CONTACT ===== -->
         <section id="contact" class="section contact-section" aria-label="Contact">
+            <!-- Matrix Rain Background -->
+            <canvas id="matrixCanvasContact" class="matrix-background" aria-hidden="true"></canvas>
+
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <span class="section-tag">Get In Touch</span>
@@ -687,24 +711,24 @@
                     </div>
 
                     <div class="contact-form-wrapper" data-aos="fade-left" data-aos-delay="150">
-                        <form id="contactForm" class="contact-form" action="#" method="POST" novalidate>
+                        <form id="contactForm" class="contact-form" action="mailto:thamagakevin12@gmail.com" method="POST" enctype="text/plain">
                             <div class="form-group">
                                 <label for="formName">Your Name</label>
-                                <input type="text" id="formName" placeholder="John Doe" required />
+                                <input type="text" id="formName" name="Name" placeholder="Your full name" required />
                                 <span class="form-error">Please enter your name</span>
                             </div>
                             <div class="form-group">
                                 <label for="formEmail">Your Email</label>
-                                <input type="email" id="formEmail" placeholder="john@example.com" required />
+                                <input type="email" id="formEmail" name="Email" placeholder="Your email address" required />
                                 <span class="form-error">Please enter a valid email</span>
                             </div>
                             <div class="form-group">
                                 <label for="formSubject">Subject</label>
-                                <input type="text" id="formSubject" placeholder="Project Inquiry" />
+                                <input type="text" id="formSubject" name="Subject" placeholder="What's this about?" />
                             </div>
                             <div class="form-group">
                                 <label for="formMessage">Message</label>
-                                <textarea id="formMessage" rows="5" placeholder="Tell me about your project..." required></textarea>
+                                <textarea id="formMessage" name="Message" rows="5" placeholder="Write your message here..." required></textarea>
                                 <span class="form-error">Please enter your message</span>
                             </div>
                             <button type="submit" class="btn btn-primary btn-submit">

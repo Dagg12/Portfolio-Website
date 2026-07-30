@@ -49,72 +49,88 @@ if (typeof Typed !== 'undefined') {
 }
 
 /* ====================================================
-   MATRIX RAIN BACKGROUND (Hacking/Coding Vibe)
+   MATRIX RAIN BACKGROUND - Multiple Canvases (ALL SECTIONS)
    ==================================================== */
 (function initMatrixRain() {
-    const canvas = document.getElementById('matrixCanvas');
-    if (!canvas) return;
+    // Get all matrix canvas elements
+    const canvases = document.querySelectorAll('.matrix-background');
+    
+    if (!canvases.length) return;
 
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let columns;
-    let drops = [];
-    let matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>?/{}[]|!@#$%^&*()_+';
+    canvases.forEach((canvas) => {
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let columns;
+        let drops = [];
+        let matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>?/{}[]|!@#$%^&*()_+';
 
-    function resizeCanvas() {
-        const container = canvas.parentElement;
-        width = container.offsetWidth;
-        height = container.offsetHeight;
-        canvas.width = width;
-        canvas.height = height;
-        columns = Math.floor(width / 18);
-        drops = [];
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.random() * -height;
-        }
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    function drawMatrix() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-        ctx.fillRect(0, 0, width, height);
-
-        ctx.font = '18px "Courier New", monospace';
-
-        for (let i = 0; i < drops.length; i++) {
-            const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-            const x = i * 18;
-            const y = drops[i] * 18;
-
-            const brightness = Math.random() * 0.6 + 0.4;
-            const color = `rgba(37, 99, 235, ${brightness})`;
-            ctx.fillStyle = color;
-            ctx.fillText(char, x, y);
-
-            if (y > height && Math.random() > 0.975) {
-                drops[i] = 0;
+        function resizeCanvas() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            width = canvas.width = rect.width;
+            height = canvas.height = rect.height;
+            columns = Math.floor(width / 18);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -height;
             }
-            drops[i] += 0.5 + Math.random() * 0.5;
         }
 
-        requestAnimationFrame(drawMatrix);
-    }
+        // Resize on load and window resize
+        resizeCanvas();
 
-    drawMatrix();
+        function drawMatrix() {
+            // Semi-transparent to create trail effect
+            ctx.fillStyle = 'rgba(10, 15, 26, 0.05)';
+            ctx.fillRect(0, 0, width, height);
 
-    let isVisible = true;
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                isVisible = true;
-            } else {
-                isVisible = false;
+            ctx.font = '18px "Courier New", monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                const x = i * 18;
+                const y = drops[i] * 18;
+
+                // Varying brightness for depth effect
+                const brightness = Math.random() * 0.6 + 0.2;
+                const color = `rgba(37, 99, 235, ${brightness})`;
+                ctx.fillStyle = color;
+                ctx.fillText(char, x, y);
+
+                // Some characters are brighter (highlighted)
+                if (Math.random() < 0.05) {
+                    ctx.fillStyle = `rgba(37, 99, 235, 0.9)`;
+                    ctx.fillText(char, x, y);
+                }
+
+                if (y > height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i] += 0.5 + Math.random() * 0.5;
             }
+
+            requestAnimationFrame(drawMatrix);
+        }
+
+        drawMatrix();
+
+        // Handle resize for this canvas
+        window.addEventListener('resize', () => {
+            resizeCanvas();
         });
-    }, { threshold: 0 });
-    observer.observe(canvas);
+
+        // Pause animation when not visible for performance
+        let isVisible = true;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    isVisible = true;
+                } else {
+                    isVisible = false;
+                }
+            });
+        }, { threshold: 0 });
+        observer.observe(canvas);
+    });
 })();
 
 /* ====================================================
@@ -175,7 +191,7 @@ if (typeof Typed !== 'undefined') {
     const themeToggle = document.getElementById('themeToggle');
     const icon = themeToggle?.querySelector('i');
 
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateIcon(savedTheme);
 
@@ -403,43 +419,57 @@ if (typeof Typed !== 'undefined') {
 })();
 
 /* ====================================================
-   CONTACT FORM
+   CONTACT FORM - Sends to Email
    ==================================================== */
 (function initContactForm() {
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // Reset errors
         form.querySelectorAll('.form-group').forEach((g) => g.classList.remove('error'));
         status.textContent = '';
         status.className = 'form-status';
 
+        // Validate
         let isValid = true;
         const name = document.getElementById('formName');
         const email = document.getElementById('formEmail');
         const message = document.getElementById('formMessage');
 
-        if (!name.value.trim()) { name.closest('.form-group').classList.add('error'); isValid = false; }
-        if (!email.value.trim() || !isValidEmail(email.value)) { email.closest('.form-group').classList.add('error'); isValid = false; }
-        if (!message.value.trim()) { message.closest('.form-group').classList.add('error'); isValid = false; }
+        if (!name.value.trim()) {
+            name.closest('.form-group').classList.add('error');
+            isValid = false;
+        }
+        if (!email.value.trim() || !isValidEmail(email.value)) {
+            email.closest('.form-group').classList.add('error');
+            isValid = false;
+        }
+        if (!message.value.trim()) {
+            message.closest('.form-group').classList.add('error');
+            isValid = false;
+        }
 
         if (!isValid) return;
 
-        status.textContent = 'Sending message...';
+        // Show sending status
+        status.textContent = 'Opening your email client...';
         status.className = 'form-status';
         const btn = form.querySelector('.btn-submit');
         btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
         setTimeout(() => {
-            status.textContent = '✅ Message sent successfully! I\'ll get back to you soon.';
+            status.textContent = '✅ Email client opened! Please send your message.';
             status.className = 'form-status success';
-            form.reset();
             btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-        }, 1800);
+        }, 1000);
+
+        setTimeout(() => {
+            form.submit();
+        }, 300);
     });
 
     function isValidEmail(email) {
@@ -451,7 +481,7 @@ if (typeof Typed !== 'undefined') {
    SMOOTH SCROLL (fallback)
    ==================================================== */
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
         const target = document.querySelector(targetId);
@@ -485,7 +515,7 @@ document.addEventListener('keydown', (e) => {
    PREVENT DOUBLE SUBMIT
    ==================================================== */
 document.querySelectorAll('form').forEach((form) => {
-    form.addEventListener('submit', function () {
+    form.addEventListener('submit', function() {
         const btn = this.querySelector('button[type="submit"]');
         if (btn) {
             btn.disabled = true;
