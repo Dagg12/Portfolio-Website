@@ -2,22 +2,15 @@
    ROOT VARIABLES & THEMES
    ==================================================== */
 :root {
-    /* Primary Colors */
     --primary: #2563EB;
     --primary-dark: #1D4ED8;
     --primary-light: #3B82F6;
     --primary-rgb: 37, 99, 235;
-
-    /* Secondary Colors */
     --secondary: #1E293B;
     --secondary-light: #334155;
     --secondary-dark: #0F172A;
-
-    /* Accent Colors */
     --accent: #22C55E;
     --accent-dark: #16A34A;
-
-    /* Neutral Colors */
     --white: #FFFFFF;
     --gray-50: #F8FAFC;
     --gray-100: #F1F5F9;
@@ -39,7 +32,6 @@
     --text-secondary: #94A3B8;
     --text-muted: #64748B;
     --border-color: rgba(37, 99, 235, 0.25);
-    --border-glow: rgba(37, 99, 235, 0.3);
     --shadow-color: rgba(0, 0, 0, 0.5);
     --shadow-color-hover: rgba(37, 99, 235, 0.15);
     --glass-border: rgba(37, 99, 235, 0.2);
@@ -48,30 +40,21 @@
     --scrollbar-track: #1E293B;
     --scrollbar-thumb: var(--primary);
 
-    /* Typography */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-size-base: 16px;
     --line-height-base: 1.6;
-
-    /* Spacing */
     --section-padding: 80px 0;
     --container-max: 1200px;
     --container-padding: 0 20px;
-
-    /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 20px;
     --radius-xl: 28px;
     --radius-full: 9999px;
-
-    /* Transitions */
     --transition-fast: 0.2s ease;
     --transition-base: 0.3s ease;
     --transition-slow: 0.5s ease;
     --transition-slower: 0.8s ease;
-
-    /* Z-Index Layers */
     --z-negative: -1;
     --z-default: 1;
     --z-sticky: 100;
@@ -80,9 +63,6 @@
     --z-loader: 9999;
 }
 
-/* ====================================================
-   LIGHT MODE THEME (Optional)
-   ==================================================== */
 [data-theme="light"] {
     --bg-primary: #F8FAFC;
     --bg-secondary: #FFFFFF;
@@ -92,7 +72,6 @@
     --text-secondary: #475569;
     --text-muted: #94A3B8;
     --border-color: rgba(37, 99, 235, 0.15);
-    --border-glow: rgba(37, 99, 235, 0.15);
     --shadow-color: rgba(0, 0, 0, 0.08);
     --shadow-color-hover: rgba(37, 99, 235, 0.08);
     --glass-border: rgba(255, 255, 255, 0.3);
@@ -103,7 +82,7 @@
 }
 
 /* ====================================================
-   RESET & BASE STYLES
+   RESET & BASE
    ==================================================== */
 *,
 *::before,
@@ -131,7 +110,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -147,7 +125,6 @@ body {
     background: var(--primary-dark);
 }
 
-/* Selection */
 ::selection {
     background: var(--primary);
     color: var(--white);
@@ -353,7 +330,7 @@ body {
 }
 
 /* ====================================================
-   SCROLL PROGRESS BAR
+   SCROLL PROGRESS
    ==================================================== */
 #scrollProgress {
     position: fixed;
@@ -368,7 +345,7 @@ body {
 }
 
 /* ====================================================
-   BACK TO TOP BUTTON
+   BACK TO TOP
    ==================================================== */
 #backToTop {
     position: fixed;
@@ -401,7 +378,7 @@ body {
 }
 
 /* ====================================================
-   CUSTOM CURSOR (Desktop Only)
+   CUSTOM CURSOR
    ==================================================== */
 .custom-cursor {
     display: none;
@@ -449,7 +426,7 @@ body {
 }
 
 /* ====================================================
-   NAVIGATION - Glassmorphism
+   NAVIGATION
    ==================================================== */
 .navbar {
     position: fixed;
@@ -462,7 +439,7 @@ body {
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid var(--border-color);
-    transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+    transition: all var(--transition-base);
 }
 
 .navbar.scrolled {
@@ -583,7 +560,6 @@ body {
     transform: translateY(-7.5px) rotate(-45deg);
 }
 
-/* Mobile Navigation Overlay */
 .nav-overlay {
     display: none;
     position: fixed;
@@ -596,7 +572,6 @@ body {
     display: block;
 }
 
-/* Mobile Navigation */
 @media (max-width: 992px) {
     .nav-links {
         position: fixed;
@@ -614,22 +589,19 @@ body {
         box-shadow: -8px 0 32px var(--shadow-color);
         border-left: 1px solid var(--border-color);
     }
-
     .nav-links.open {
         right: 0;
     }
-
     .nav-links a {
         font-size: 1.1rem;
     }
-
     .hamburger {
         display: flex;
     }
 }
 
 /* ====================================================
-   MATRIX RAIN BACKGROUND - Global for ALL sections
+   MATRIX RAIN - ALL SECTIONS
    ==================================================== */
 .matrix-background {
     position: absolute;
@@ -645,7 +617,6 @@ body {
     opacity: 0.6;
 }
 
-/* All sections need relative positioning for the canvas */
 .hero-section,
 .about-section,
 .skills-section,
@@ -704,28 +675,13 @@ body {
 }
 
 @keyframes wave {
-    0%,
-    100% {
-        transform: rotate(0deg);
-    }
-    10% {
-        transform: rotate(14deg);
-    }
-    20% {
-        transform: rotate(-8deg);
-    }
-    30% {
-        transform: rotate(14deg);
-    }
-    40% {
-        transform: rotate(-4deg);
-    }
-    50% {
-        transform: rotate(10deg);
-    }
-    60% {
-        transform: rotate(0deg);
-    }
+    0%, 100% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+    60% { transform: rotate(0deg); }
 }
 
 .hero-name {
@@ -802,7 +758,6 @@ body {
     box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.3);
 }
 
-/* Hero Image */
 .hero-image-wrapper {
     display: flex;
     justify-content: center;
@@ -824,15 +779,8 @@ body {
 }
 
 @keyframes pulseGlow {
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: 0.6;
-    }
-    50% {
-        transform: scale(1.08);
-        opacity: 1;
-    }
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.08); opacity: 1; }
 }
 
 .hero-image {
@@ -852,7 +800,6 @@ body {
     object-fit: cover;
 }
 
-/* Floating Badges - Glassmorphism */
 .floating-badge {
     position: absolute;
     display: flex;
@@ -876,33 +823,15 @@ body {
     font-size: 1rem;
 }
 
-.badge-1 {
-    top: 10%;
-    right: -10%;
-    animation-delay: 0s;
-}
-.badge-2 {
-    bottom: 15%;
-    left: -15%;
-    animation-delay: 2s;
-}
-.badge-3 {
-    bottom: -5%;
-    right: 5%;
-    animation-delay: 4s;
-}
+.badge-1 { top: 10%; right: -10%; animation-delay: 0s; }
+.badge-2 { bottom: 15%; left: -15%; animation-delay: 2s; }
+.badge-3 { bottom: -5%; right: 5%; animation-delay: 4s; }
 
 @keyframes float {
-    0%,
-    100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-12px);
-    }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
 }
 
-/* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
@@ -938,65 +867,43 @@ body {
 }
 
 @keyframes scrollWheel {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(16px);
-        opacity: 0;
-    }
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(16px); opacity: 0; }
 }
 
 @keyframes bounceDown {
-    0%,
-    100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        transform: translateX(-50%) translateY(6px);
-    }
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
 }
 
-/* ====================================================
-   RESPONSIVE: HERO
-   ==================================================== */
 @media (max-width: 1024px) {
     .hero-grid {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2rem;
     }
-
     .hero-text {
         align-items: center;
     }
-
     .hero-description {
         max-width: 100%;
     }
-
     .hero-buttons {
         justify-content: center;
     }
-
     .hero-social {
         justify-content: center;
     }
-
     .hero-image-container {
         width: 280px;
         height: 280px;
     }
-
     .floating-badge {
         display: none;
     }
-
     .hero-name {
         font-size: 2.5rem;
     }
-
     .hero-typed-wrapper {
         font-size: 1.2rem;
         justify-content: center;
@@ -1008,27 +915,23 @@ body {
         width: 200px;
         height: 200px;
     }
-
     .hero-name {
         font-size: 1.8rem;
     }
-
     .hero-typed-wrapper {
         font-size: 1rem;
     }
-
     .hero-buttons .btn {
         width: 100%;
         justify-content: center;
     }
-
     .scroll-indicator {
         display: none;
     }
 }
 
 /* ====================================================
-   ABOUT SECTION - Glassmorphism
+   ABOUT SECTION
    ==================================================== */
 .about-section {
     background: var(--bg-secondary);
@@ -1076,7 +979,6 @@ body {
     border-radius: var(--radius-md);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     transition: all var(--transition-base);
 }
 
@@ -1127,7 +1029,6 @@ body {
     right: 10%;
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     padding: 0.75rem 1.5rem;
@@ -1148,23 +1049,19 @@ body {
     font-weight: 500;
 }
 
-/* Responsive About */
 @media (max-width: 992px) {
     .about-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
         text-align: center;
     }
-
     .about-content {
         align-items: center;
     }
-
     .about-stats {
         grid-template-columns: repeat(2, 1fr);
         width: 100%;
     }
-
     .about-image-inner {
         width: 240px;
         height: 240px;
@@ -1185,7 +1082,7 @@ body {
 }
 
 /* ====================================================
-   SKILLS SECTION - Glassmorphism
+   SKILLS SECTION
    ==================================================== */
 .skills-section {
     background: var(--bg-primary);
@@ -1200,7 +1097,6 @@ body {
 .skill-category {
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     padding: 1.75rem;
@@ -1284,7 +1180,7 @@ body {
 }
 
 /* ====================================================
-   PROJECTS SECTION - Glassmorphism Cards
+   PROJECTS SECTION
    ==================================================== */
 .projects-section {
     background: var(--bg-secondary);
@@ -1303,7 +1199,6 @@ body {
 .project-card-inner {
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -1431,7 +1326,7 @@ body {
 }
 
 /* ====================================================
-   TIMELINE (Experience & Education) - Glassmorphism
+   TIMELINE
    ==================================================== */
 .timeline {
     position: relative;
@@ -1483,7 +1378,6 @@ body {
 .timeline-content {
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     padding: 1.5rem 2rem;
@@ -1577,7 +1471,7 @@ body {
 }
 
 /* ====================================================
-   CERTIFICATES SECTION - Glassmorphism
+   CERTIFICATES
    ==================================================== */
 .certificates-section {
     background: var(--bg-primary);
@@ -1592,7 +1486,6 @@ body {
 .certificate-card {
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     padding: 2rem;
@@ -1667,7 +1560,7 @@ body {
 }
 
 /* ====================================================
-   GITHUB SECTION - Glassmorphism
+   GITHUB
    ==================================================== */
 .github-section {
     background: var(--bg-secondary);
@@ -1686,7 +1579,6 @@ body {
     padding: 2rem;
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--glass-shadow);
@@ -1756,7 +1648,6 @@ body {
 .repo-card {
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     padding: 1.25rem;
@@ -1817,7 +1708,7 @@ body {
 }
 
 /* ====================================================
-   CONTACT SECTION - Glassmorphism
+   CONTACT
    ==================================================== */
 .contact-section {
     background: var(--bg-primary);
@@ -1839,7 +1730,6 @@ body {
 .contact-card {
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
     padding: 1.5rem;
@@ -1887,11 +1777,9 @@ body {
     color: var(--primary);
 }
 
-/* Contact Form - Glassmorphism */
 .contact-form-wrapper {
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     padding: 2rem;
@@ -2083,21 +1971,18 @@ body {
 }
 
 /* ====================================================
-   RESPONSIVE: GENERAL
+   RESPONSIVE
    ==================================================== */
 @media (max-width: 992px) {
     .section-title {
         font-size: 2rem;
     }
-
     .contact-grid {
         grid-template-columns: 1fr;
     }
-
     .contact-info {
         grid-template-columns: 1fr 1fr;
     }
-
     .footer-grid {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
@@ -2108,54 +1993,42 @@ body {
     .section {
         padding: 60px 0;
     }
-
     .section-title {
         font-size: 1.75rem;
     }
-
     .skills-grid {
         grid-template-columns: 1fr;
     }
-
     .projects-grid {
         grid-template-columns: 1fr;
     }
-
     .certificates-grid {
         grid-template-columns: 1fr 1fr;
     }
-
     .github-profile {
         flex-direction: column;
         text-align: center;
     }
-
     .github-stats {
         justify-content: center;
     }
-
     .contact-info {
         grid-template-columns: 1fr 1fr;
     }
-
     .footer-grid {
         grid-template-columns: 1fr;
         text-align: center;
     }
-
     .footer-bio {
         max-width: 100%;
     }
-
     .footer-social-icons {
         justify-content: center;
     }
-
     .footer-bottom {
         flex-direction: column;
         text-align: center;
     }
-
     .timeline::before {
         left: 16px;
     }
@@ -2180,40 +2053,32 @@ body {
     .section-title {
         font-size: 1.5rem;
     }
-
     .certificates-grid {
         grid-template-columns: 1fr;
     }
-
     .contact-info {
         grid-template-columns: 1fr;
     }
-
     .contact-form-wrapper {
         padding: 1.25rem;
     }
-
     .hero-buttons .btn {
         font-size: 0.85rem;
         padding: 0.6rem 1.25rem;
     }
-
     .about-stats {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 /* ====================================================
-   ACCESSIBILITY: FOCUS VISIBLE
+   ACCESSIBILITY
    ==================================================== */
 :focus-visible {
     outline: 3px solid var(--primary);
     outline-offset: 2px;
 }
 
-/* ====================================================
-   REDUCED MOTION
-   ==================================================== */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -2222,7 +2087,6 @@ body {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-
     html {
         scroll-behavior: auto;
     }

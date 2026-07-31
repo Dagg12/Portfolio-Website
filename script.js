@@ -49,12 +49,10 @@ if (typeof Typed !== 'undefined') {
 }
 
 /* ====================================================
-   MATRIX RAIN BACKGROUND - Multiple Canvases (ALL SECTIONS)
+   MATRIX RAIN - ALL SECTIONS
    ==================================================== */
 (function initMatrixRain() {
-    // Get all matrix canvas elements
     const canvases = document.querySelectorAll('.matrix-background');
-    
     if (!canvases.length) return;
 
     canvases.forEach((canvas) => {
@@ -62,7 +60,7 @@ if (typeof Typed !== 'undefined') {
         let width, height;
         let columns;
         let drops = [];
-        let matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>?/{}[]|!@#$%^&*()_+';
+        const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>?/{}[]|!@#$%^&*()_+';
 
         function resizeCanvas() {
             const rect = canvas.parentElement.getBoundingClientRect();
@@ -75,28 +73,21 @@ if (typeof Typed !== 'undefined') {
             }
         }
 
-        // Resize on load and window resize
         resizeCanvas();
 
         function drawMatrix() {
-            // Semi-transparent to create trail effect
             ctx.fillStyle = 'rgba(10, 15, 26, 0.05)';
             ctx.fillRect(0, 0, width, height);
-
             ctx.font = '18px "Courier New", monospace';
 
             for (let i = 0; i < drops.length; i++) {
-                const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                const char = chars[Math.floor(Math.random() * chars.length)];
                 const x = i * 18;
                 const y = drops[i] * 18;
-
-                // Varying brightness for depth effect
                 const brightness = Math.random() * 0.6 + 0.2;
-                const color = `rgba(37, 99, 235, ${brightness})`;
-                ctx.fillStyle = color;
+                ctx.fillStyle = `rgba(37, 99, 235, ${brightness})`;
                 ctx.fillText(char, x, y);
 
-                // Some characters are brighter (highlighted)
                 if (Math.random() < 0.05) {
                     ctx.fillStyle = `rgba(37, 99, 235, 0.9)`;
                     ctx.fillText(char, x, y);
@@ -113,19 +104,12 @@ if (typeof Typed !== 'undefined') {
 
         drawMatrix();
 
-        // Handle resize for this canvas
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-        });
+        window.addEventListener('resize', resizeCanvas);
 
-        // Pause animation when not visible for performance
-        let isVisible = true;
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    isVisible = true;
-                } else {
-                    isVisible = false;
+                    drawMatrix();
                 }
             });
         }, { threshold: 0 });
@@ -134,7 +118,7 @@ if (typeof Typed !== 'undefined') {
 })();
 
 /* ====================================================
-   CUSTOM CURSOR (Desktop)
+   CUSTOM CURSOR
    ==================================================== */
 (function initCustomCursor() {
     const cursor = document.getElementById('customCursor');
@@ -143,9 +127,12 @@ if (typeof Typed !== 'undefined') {
     if (!cursor || !cursorDot) return;
     if (window.innerWidth < 1024) return;
 
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-    let dotX = 0, dotY = 0;
+    let mouseX = 0,
+        mouseY = 0;
+    let cursorX = 0,
+        cursorY = 0;
+    let dotX = 0,
+        dotY = 0;
 
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -169,7 +156,7 @@ if (typeof Typed !== 'undefined') {
     animateCursor();
 
     const interactiveElements = document.querySelectorAll(
-        'a, button, .btn, .project-card, .skill-item, .contact-card, .certificate-card, .timeline-content'
+        'a, button, .btn, .project-card, .skill-category, .contact-card, .certificate-card, .timeline-content, .repo-card'
     );
 
     interactiveElements.forEach((el) => {
@@ -180,6 +167,12 @@ if (typeof Typed !== 'undefined') {
         el.addEventListener('mouseleave', () => {
             cursor.classList.remove('active');
             cursorDot.classList.remove('active');
+        });
+        el.addEventListener('mousedown', () => {
+            cursor.classList.add('pulse');
+        });
+        el.addEventListener('mouseup', () => {
+            setTimeout(() => cursor.classList.remove('pulse'), 300);
         });
     });
 })();
@@ -253,8 +246,7 @@ if (typeof Typed !== 'undefined') {
     const navLinkElements = document.querySelectorAll('.nav-links a');
 
     function updateNavbar() {
-        if (window.scrollY > 50) navbar?.classList.add('scrolled');
-        else navbar?.classList.remove('scrolled');
+        navbar?.classList.toggle('scrolled', window.scrollY > 50);
 
         let current = '';
         sections.forEach((section) => {
@@ -280,8 +272,7 @@ if (typeof Typed !== 'undefined') {
     window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        progressBar.style.width = Math.min(progress, 100) + '%';
+        progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
     }, { passive: true });
 })();
 
@@ -291,8 +282,7 @@ if (typeof Typed !== 'undefined') {
 (function initBackToTop() {
     const button = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 400) button.classList.add('visible');
-        else button.classList.remove('visible');
+        button.classList.toggle('visible', window.scrollY > 400);
     }, { passive: true });
     button?.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -323,8 +313,8 @@ if (typeof Typed !== 'undefined') {
         let current = 0;
         const duration = 2000;
         const stepTime = 20;
-        const steps = duration / stepTime;
-        const increment = target / steps;
+        const increment = target / (duration / stepTime);
+
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
@@ -362,7 +352,7 @@ if (typeof Typed !== 'undefined') {
 })();
 
 /* ====================================================
-   GITHUB REPOS FETCH (from Dagg12)
+   GITHUB REPOS FETCH - FIXED
    ==================================================== */
 (function initGitHubRepos() {
     const reposContainer = document.getElementById('githubRepos');
@@ -370,71 +360,167 @@ if (typeof Typed !== 'undefined') {
 
     const username = 'Dagg12';
 
-    fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`)
-        .then((response) => {
-            if (!response.ok) throw new Error('GitHub API error');
-            return response.json();
-        })
-        .then((repos) => {
-            reposContainer.innerHTML = '';
-            if (!repos.length) {
-                reposContainer.innerHTML = '<p class="repos-loading">No public repositories found.</p>';
-                return;
-            }
-            repos.forEach((repo) => {
-                const card = document.createElement('div');
-                card.className = 'repo-card';
-                card.innerHTML = `
-                    <div class="repo-name"><i class="fab fa-github"></i> ${repo.name}</div>
-                    ${repo.description ? `<p class="repo-desc">${repo.description}</p>` : ''}
-                    <div class="repo-meta">
-                        ${repo.language ? `<span class="repo-lang"><span class="lang-color" style="background: ${getLangColor(repo.language)}"></span> ${repo.language}</span>` : ''}
-                        <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
-                        <span><i class="fas fa-code-fork"></i> ${repo.forks_count}</span>
-                    </div>
-                `;
-                reposContainer.appendChild(card);
-            });
-        })
-        .catch(() => {
+    // Show loading state
+    reposContainer.innerHTML = `
+        <div class="repos-loading" style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">
+            <i class="fas fa-spinner fa-spin"></i> Loading repositories...
+        </div>
+    `;
+
+    // Use the GitHub API with proper headers
+    fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/vnd.github.v3+json',
+            'User-Agent': 'Portfolio-Website'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`GitHub API error: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(repos => {
+        reposContainer.innerHTML = '';
+        
+        if (!repos || repos.length === 0) {
             reposContainer.innerHTML = `
-                <p class="repos-loading" style="color: #EF4444;">
-                    <i class="fas fa-exclamation-circle"></i> Unable to load repositories.
-                    <a href="https://github.com/${username}" target="_blank" style="color: var(--primary);">View on GitHub →</a>
+                <p class="repos-loading" style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">
+                    <i class="fas fa-info-circle"></i> No public repositories found.
                 </p>
             `;
+            return;
+        }
+
+        repos.forEach((repo) => {
+            const card = document.createElement('div');
+            card.className = 'repo-card';
+            card.style.animation = 'fadeInUp 0.5s ease forwards';
+            card.style.opacity = '0';
+            
+            const langColor = getLangColor(repo.language);
+            
+            card.innerHTML = `
+                <div class="repo-name">
+                    <i class="fab fa-github"></i> 
+                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none;">
+                        ${repo.name}
+                    </a>
+                </div>
+                ${repo.description ? `<p class="repo-desc">${repo.description}</p>` : ''}
+                <div class="repo-meta">
+                    ${repo.language ? `
+                        <span class="repo-lang">
+                            <span class="lang-color" style="background: ${langColor}"></span>
+                            ${repo.language}
+                        </span>
+                    ` : ''}
+                    <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                    <span><i class="fas fa-code-fork"></i> ${repo.forks_count}</span>
+                    ${repo.updated_at ? `
+                        <span><i class="fas fa-clock"></i> ${new Date(repo.updated_at).toLocaleDateString()}</span>
+                    ` : ''}
+                </div>
+            `;
+            reposContainer.appendChild(card);
         });
+    })
+    .catch((error) => {
+        console.error('GitHub API Error:', error);
+        
+        // Fallback: Show manual repository links
+        reposContainer.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    <i class="fas fa-exclamation-circle" style="color: #F59E0B; margin-right: 0.5rem;"></i>
+                    Unable to load repositories automatically.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;">
+                    <a href="https://github.com/Dagg12/Centalytics" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 1rem;">
+                        <i class="fab fa-github"></i> Centalytics
+                    </a>
+                    <a href="https://github.com/TeeCee07/ClinicalBloodBank" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 1rem;">
+                        <i class="fab fa-github"></i> ClinicalBloodBank
+                    </a>
+                    <a href="https://github.com/TeeCee07/CruizeControlRentalCars" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 1rem;">
+                        <i class="fab fa-github"></i> CruizeControl
+                    </a>
+                    <a href="https://github.com/Dagg12/Portfolio-Website" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 1rem;">
+                        <i class="fab fa-github"></i> Portfolio
+                    </a>
+                    <a href="https://github.com/Dagg12/Thamas-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 1rem;">
+                        <i class="fab fa-github"></i> Thamas Portfolio
+                    </a>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem;">
+                    <i class="fas fa-info-circle"></i> Visit my 
+                    <a href="https://github.com/Dagg12" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">
+                        GitHub profile
+                    </a> 
+                    for all repositories.
+                </p>
+            </div>
+        `;
+    });
 
     function getLangColor(lang) {
         const colors = {
-            JavaScript: '#f1e05a', HTML: '#e34c26', CSS: '#563d7c', Python: '#3572A5',
-            Java: '#b07219', C: '#555555', 'C++': '#f34b7d', 'C#': '#178600',
-            PHP: '#4F5D95', TypeScript: '#2b7489', Go: '#00ADD8', Rust: '#dea584',
-            Swift: '#ffac45', Kotlin: '#A97BFF', Ruby: '#701516', Shell: '#89e051',
-            SQL: '#e38c00', SCSS: '#c6538c', Vue: '#41b883', React: '#61dafb',
+            JavaScript: '#f1e05a',
+            HTML: '#e34c26',
+            CSS: '#563d7c',
+            Python: '#3572A5',
+            Java: '#b07219',
+            C: '#555555',
+            'C++': '#f34b7d',
+            'C#': '#178600',
+            PHP: '#4F5D95',
+            TypeScript: '#2b7489',
+            Go: '#00ADD8',
+            Rust: '#dea584',
+            Swift: '#ffac45',
+            Kotlin: '#A97BFF',
+            Ruby: '#701516',
+            Shell: '#89e051',
+            SQL: '#e38c00',
+            SCSS: '#c6538c',
+            Vue: '#41b883',
+            React: '#61dafb',
             Angular: '#dd1b16',
+            'Jupyter Notebook': '#DA5B0B',
+            'Objective-C': '#438eff',
+            Perl: '#0298c3',
+            R: '#198CE7',
+            Elixir: '#6e4a7e',
+            'Crystal': '#000100',
+            Dart: '#00B4AB',
+            Dockerfile: '#384d54',
+            Groovy: '#4298b8',
+            Lua: '#000080',
+            MATLAB: '#e16737',
+            PowerShell: '#012456',
+            Scala: '#c22d40',
+            Stylus: '#ff6347',
         };
         return colors[lang] || '#6c757d';
     }
 })();
 
 /* ====================================================
-   CONTACT FORM - Sends to Email
+   CONTACT FORM - Formspree Integration
    ==================================================== */
 (function initContactForm() {
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
     if (!form) return;
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // Reset errors
         form.querySelectorAll('.form-group').forEach((g) => g.classList.remove('error'));
         status.textContent = '';
         status.className = 'form-status';
 
-        // Validate
         let isValid = true;
         const name = document.getElementById('formName');
         const email = document.getElementById('formEmail');
@@ -455,21 +541,38 @@ if (typeof Typed !== 'undefined') {
 
         if (!isValid) return;
 
-        // Show sending status
-        status.textContent = 'Opening your email client...';
+        status.textContent = 'Sending message...';
         status.className = 'form-status';
         const btn = form.querySelector('.btn-submit');
         btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-        setTimeout(() => {
-            status.textContent = '✅ Email client opened! Please send your message.';
-            status.className = 'form-status success';
-            btn.disabled = false;
-        }, 1000);
+        try {
+            const formData = new FormData(form);
+            const response = await fetch('https://formspree.io/f/maqrzbgd', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
 
-        setTimeout(() => {
-            form.submit();
-        }, 300);
+            if (response.ok) {
+                status.textContent = '✅ Message sent successfully! I\'ll get back to you soon.';
+                status.className = 'form-status success';
+                form.reset();
+            } else {
+                const data = await response.json();
+                status.textContent = '❌ ' + (data.error || 'Something went wrong. Please try again.');
+                status.className = 'form-status error';
+            }
+        } catch (error) {
+            status.textContent = '❌ Network error. Please check your connection and try again.';
+            status.className = 'form-status error';
+        }
+
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
     });
 
     function isValidEmail(email) {
@@ -478,7 +581,7 @@ if (typeof Typed !== 'undefined') {
 })();
 
 /* ====================================================
-   SMOOTH SCROLL (fallback)
+   SMOOTH SCROLL
    ==================================================== */
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', function(e) {
@@ -527,6 +630,11 @@ document.querySelectorAll('form').forEach((form) => {
 /* ====================================================
    CONSOLE WELCOME
    ==================================================== */
-console.log('%c🚀 Vhukhudo Kevin Thamaga - Portfolio', 'font-size: 24px; font-weight: bold; color: #2563EB;');
-console.log('%cBuilt with ❤️ using HTML, CSS & JavaScript + Matrix Rain', 'font-size: 14px; color: #64748b;');
-console.log('%chttps://github.com/Dagg12', 'font-size: 12px; color: #22C55E;');
+console.log('%c🚀 Vhukhudo Kevin Thamaga - Portfolio v3.0', 'font-size: 24px; font-weight: bold; color: #2563EB;');
+console.log('%c┌─────────────────────────────────────────────┐', 'font-size: 12px; color: #64748b;');
+console.log('%c│  Software Developer  │  Cybersecurity       │', 'font-size: 12px; color: #64748b;');
+console.log('%c│  Full Stack          │  Networking           │', 'font-size: 12px; color: #64748b;');
+console.log('%c└─────────────────────────────────────────────┘', 'font-size: 12px; color: #64748b;');
+console.log('%cBuilt with ❤️ using HTML, CSS, JavaScript & Matrix Rain', 'font-size: 14px; color: #22C55E;');
+console.log('%chttps://github.com/Dagg12', 'font-size: 12px; color: #06B6D4;');
+console.log('%c💡 Messages are sent via Formspree', 'font-size: 12px; color: #94A3B8;');
