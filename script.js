@@ -49,7 +49,7 @@ if (typeof Typed !== 'undefined') {
 }
 
 /* ====================================================
-   MATRIX RAIN - ALL SECTIONS
+   MATRIX RAIN BACKGROUND - Multiple Canvases (ALL SECTIONS)
    ==================================================== */
 (function initMatrixRain() {
     const canvases = document.querySelectorAll('.matrix-background');
@@ -60,7 +60,7 @@ if (typeof Typed !== 'undefined') {
         let width, height;
         let columns;
         let drops = [];
-        const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>?/{}[]|!@#$%^&*()_+';
+        let matrixChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>?/{}[]|!@#$%^&*()_+';
 
         function resizeCanvas() {
             const rect = canvas.parentElement.getBoundingClientRect();
@@ -81,7 +81,7 @@ if (typeof Typed !== 'undefined') {
             ctx.font = '18px "Courier New", monospace';
 
             for (let i = 0; i < drops.length; i++) {
-                const char = chars[Math.floor(Math.random() * chars.length)];
+                const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
                 const x = i * 18;
                 const y = drops[i] * 18;
                 const brightness = Math.random() * 0.6 + 0.2;
@@ -109,7 +109,9 @@ if (typeof Typed !== 'undefined') {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    drawMatrix();
+                    isVisible = true;
+                } else {
+                    isVisible = false;
                 }
             });
         }, { threshold: 0 });
@@ -118,7 +120,7 @@ if (typeof Typed !== 'undefined') {
 })();
 
 /* ====================================================
-   CUSTOM CURSOR
+   CUSTOM CURSOR (Desktop)
    ==================================================== */
 (function initCustomCursor() {
     const cursor = document.getElementById('customCursor');
@@ -127,12 +129,9 @@ if (typeof Typed !== 'undefined') {
     if (!cursor || !cursorDot) return;
     if (window.innerWidth < 1024) return;
 
-    let mouseX = 0,
-        mouseY = 0;
-    let cursorX = 0,
-        cursorY = 0;
-    let dotX = 0,
-        dotY = 0;
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    let dotX = 0, dotY = 0;
 
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -156,7 +155,7 @@ if (typeof Typed !== 'undefined') {
     animateCursor();
 
     const interactiveElements = document.querySelectorAll(
-        'a, button, .btn, .project-card, .skill-category, .contact-card, .certificate-card, .timeline-content, .repo-card'
+        'a, button, .btn, .project-card, .skill-item, .contact-card, .certificate-card, .timeline-content'
     );
 
     interactiveElements.forEach((el) => {
@@ -167,12 +166,6 @@ if (typeof Typed !== 'undefined') {
         el.addEventListener('mouseleave', () => {
             cursor.classList.remove('active');
             cursorDot.classList.remove('active');
-        });
-        el.addEventListener('mousedown', () => {
-            cursor.classList.add('pulse');
-        });
-        el.addEventListener('mouseup', () => {
-            setTimeout(() => cursor.classList.remove('pulse'), 300);
         });
     });
 })();
@@ -246,7 +239,8 @@ if (typeof Typed !== 'undefined') {
     const navLinkElements = document.querySelectorAll('.nav-links a');
 
     function updateNavbar() {
-        navbar?.classList.toggle('scrolled', window.scrollY > 50);
+        if (window.scrollY > 50) navbar?.classList.add('scrolled');
+        else navbar?.classList.remove('scrolled');
 
         let current = '';
         sections.forEach((section) => {
@@ -272,7 +266,8 @@ if (typeof Typed !== 'undefined') {
     window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = Math.min(progress, 100) + '%';
     }, { passive: true });
 })();
 
@@ -282,7 +277,8 @@ if (typeof Typed !== 'undefined') {
 (function initBackToTop() {
     const button = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
-        button.classList.toggle('visible', window.scrollY > 400);
+        if (window.scrollY > 400) button.classList.add('visible');
+        else button.classList.remove('visible');
     }, { passive: true });
     button?.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -313,8 +309,8 @@ if (typeof Typed !== 'undefined') {
         let current = 0;
         const duration = 2000;
         const stepTime = 20;
-        const increment = target / (duration / stepTime);
-
+        const steps = duration / stepTime;
+        const increment = target / steps;
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
@@ -352,23 +348,23 @@ if (typeof Typed !== 'undefined') {
 })();
 
 /* ====================================================
-   GITHUB REPOS FETCH - FIXED
+   GITHUB REPOS FETCH - FIXED WITH FALLBACK
    ==================================================== */
 (function initGitHubRepos() {
     const reposContainer = document.getElementById('githubRepos');
     if (!reposContainer) return;
 
     const username = 'Dagg12';
-
+    
     // Show loading state
     reposContainer.innerHTML = `
-        <div class="repos-loading" style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">
+        <div class="repos-loading" style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 2rem;">
             <i class="fas fa-spinner fa-spin"></i> Loading repositories...
         </div>
     `;
 
-    // Use the GitHub API with proper headers
-    fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`, {
+    // Try to fetch from GitHub API
+    fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6&_=${Date.now()}`, {
         method: 'GET',
         headers: {
             'Accept': 'application/vnd.github.v3+json',
@@ -382,22 +378,16 @@ if (typeof Typed !== 'undefined') {
         return response.json();
     })
     .then(repos => {
+        if (!repos || repos.length === 0) {
+            throw new Error('No repositories found');
+        }
+        
         reposContainer.innerHTML = '';
         
-        if (!repos || repos.length === 0) {
-            reposContainer.innerHTML = `
-                <p class="repos-loading" style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">
-                    <i class="fas fa-info-circle"></i> No public repositories found.
-                </p>
-            `;
-            return;
-        }
-
-        repos.forEach((repo) => {
+        repos.forEach((repo, index) => {
             const card = document.createElement('div');
             card.className = 'repo-card';
-            card.style.animation = 'fadeInUp 0.5s ease forwards';
-            card.style.opacity = '0';
+            card.style.animationDelay = `${index * 0.1}s`;
             
             const langColor = getLangColor(repo.language);
             
@@ -408,7 +398,7 @@ if (typeof Typed !== 'undefined') {
                         ${repo.name}
                     </a>
                 </div>
-                ${repo.description ? `<p class="repo-desc">${repo.description}</p>` : ''}
+                ${repo.description ? `<p class="repo-desc">${repo.description.substring(0, 100)}${repo.description.length > 100 ? '...' : ''}</p>` : ''}
                 <div class="repo-meta">
                     ${repo.language ? `
                         <span class="repo-lang">
@@ -418,50 +408,76 @@ if (typeof Typed !== 'undefined') {
                     ` : ''}
                     <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
                     <span><i class="fas fa-code-fork"></i> ${repo.forks_count}</span>
-                    ${repo.updated_at ? `
-                        <span><i class="fas fa-clock"></i> ${new Date(repo.updated_at).toLocaleDateString()}</span>
-                    ` : ''}
+                    <span><i class="fas fa-clock"></i> ${new Date(repo.updated_at).toLocaleDateString()}</span>
                 </div>
             `;
             reposContainer.appendChild(card);
         });
     })
     .catch((error) => {
-        console.error('GitHub API Error:', error);
+        console.warn('GitHub API fetch failed, using fallback:', error);
         
-        // Fallback: Show manual repository links
-        reposContainer.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                    <i class="fas fa-exclamation-circle" style="color: #F59E0B; margin-right: 0.5rem;"></i>
-                    Unable to load repositories automatically.
-                </p>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;">
-                    <a href="https://github.com/Dagg12/Centalytics" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 1rem;">
-                        <i class="fab fa-github"></i> Centalytics
-                    </a>
-                    <a href="https://github.com/TeeCee07/ClinicalBloodBank" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 1rem;">
-                        <i class="fab fa-github"></i> ClinicalBloodBank
-                    </a>
-                    <a href="https://github.com/TeeCee07/CruizeControlRentalCars" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 1rem;">
-                        <i class="fab fa-github"></i> CruizeControl
-                    </a>
-                    <a href="https://github.com/Dagg12/Portfolio-Website" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 1rem;">
-                        <i class="fab fa-github"></i> Portfolio
-                    </a>
-                    <a href="https://github.com/Dagg12/Thamas-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 1rem;">
-                        <i class="fab fa-github"></i> Thamas Portfolio
+        // FALLBACK: Display hardcoded repositories
+        const fallbackRepos = [
+            {
+                name: 'Centalytics',
+                description: 'Full‑stack hospital management system with Firebase backend. Patient management, doctor scheduling, appointments, authentication, medical records, and intuitive dashboard.',
+                html_url: 'https://github.com/Dagg12/Centalytics',
+                language: 'JavaScript',
+                stargazers_count: 1,
+                forks_count: 0,
+                updated_at: new Date().toISOString()
+            },
+            {
+                name: 'Portfolio-Website',
+                description: 'Fully responsive, modern portfolio with glassmorphism, dark mode, matrix rain background, and professional design.',
+                html_url: 'https://github.com/Dagg12/Portfolio-Website',
+                language: 'HTML',
+                stargazers_count: 2,
+                forks_count: 0,
+                updated_at: new Date().toISOString()
+            },
+            {
+                name: 'Thamas-portfolio',
+                description: 'Professional business portfolio for THAMAS TECH WORLD, an ICT and networking company. Services, case studies, technical reports, and customer reviews.',
+                html_url: 'https://github.com/Dagg12/Thamas-portfolio',
+                language: 'HTML',
+                stargazers_count: 1,
+                forks_count: 0,
+                updated_at: new Date().toISOString()
+            }
+        ];
+        
+        reposContainer.innerHTML = '';
+        
+        fallbackRepos.forEach((repo, index) => {
+            const card = document.createElement('div');
+            card.className = 'repo-card';
+            card.style.animationDelay = `${index * 0.1}s`;
+            
+            const langColor = getLangColor(repo.language);
+            
+            card.innerHTML = `
+                <div class="repo-name">
+                    <i class="fab fa-github"></i> 
+                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none;">
+                        ${repo.name}
                     </a>
                 </div>
-                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem;">
-                    <i class="fas fa-info-circle"></i> Visit my 
-                    <a href="https://github.com/Dagg12" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">
-                        GitHub profile
-                    </a> 
-                    for all repositories.
-                </p>
-            </div>
-        `;
+                <p class="repo-desc">${repo.description}</p>
+                <div class="repo-meta">
+                    ${repo.language ? `
+                        <span class="repo-lang">
+                            <span class="lang-color" style="background: ${langColor}"></span>
+                            ${repo.language}
+                        </span>
+                    ` : ''}
+                    <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                    <span><i class="fas fa-code-fork"></i> ${repo.forks_count}</span>
+                </div>
+            `;
+            reposContainer.appendChild(card);
+        });
     });
 
     function getLangColor(lang) {
@@ -492,7 +508,6 @@ if (typeof Typed !== 'undefined') {
             Perl: '#0298c3',
             R: '#198CE7',
             Elixir: '#6e4a7e',
-            'Crystal': '#000100',
             Dart: '#00B4AB',
             Dockerfile: '#384d54',
             Groovy: '#4298b8',
@@ -500,7 +515,7 @@ if (typeof Typed !== 'undefined') {
             MATLAB: '#e16737',
             PowerShell: '#012456',
             Scala: '#c22d40',
-            Stylus: '#ff6347',
+            Stylus: '#ff6347'
         };
         return colors[lang] || '#6c757d';
     }
@@ -581,7 +596,7 @@ if (typeof Typed !== 'undefined') {
 })();
 
 /* ====================================================
-   SMOOTH SCROLL
+   SMOOTH SCROLL (fallback)
    ==================================================== */
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', function(e) {
@@ -635,6 +650,6 @@ console.log('%c┌────────────────────�
 console.log('%c│  Software Developer  │  Cybersecurity       │', 'font-size: 12px; color: #64748b;');
 console.log('%c│  Full Stack          │  Networking           │', 'font-size: 12px; color: #64748b;');
 console.log('%c└─────────────────────────────────────────────┘', 'font-size: 12px; color: #64748b;');
-console.log('%cBuilt with ❤️ using HTML, CSS, JavaScript & Matrix Rain', 'font-size: 14px; color: #22C55E;');
+console.log('%cBuilt with ❤️ using HTML, CSS & JavaScript + Matrix Rain', 'font-size: 14px; color: #22C55E;');
 console.log('%chttps://github.com/Dagg12', 'font-size: 12px; color: #06B6D4;');
 console.log('%c💡 Messages are sent via Formspree', 'font-size: 12px; color: #94A3B8;');
