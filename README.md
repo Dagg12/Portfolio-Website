@@ -1,6 +1,6 @@
 # Vhukhudo Kevin Thamaga — Interactive Developer Portfolio
 
-A professional, animated portfolio for **Vhukhudo Kevin Thamaga (Dagg12)**, designed to showcase full-stack development, networking, cybersecurity, databases, AI exploration and client work.
+A professional, animated portfolio for **Vhukhudo Kevin Thamaga (Dagg12)**, designed to showcase full-stack development, networking, cybersecurity, databases, AI exploration, freelance work and client/business projects.
 
 **Live portfolio:** https://dagg12.github.io/Portfolio-Website/  
 **GitHub:** https://github.com/Dagg12
@@ -9,46 +9,50 @@ A professional, animated portfolio for **Vhukhudo Kevin Thamaga (Dagg12)**, desi
 
 ## Experience & Design
 
-The portfolio uses a dark developer aesthetic with animated matrix visuals, glassmorphism, responsive layouts and interactive project cards. The latest interface adds project filtering, 3D hover tilt, animated technology cards, scroll motion, theme persistence and richer project previews.
+The portfolio now uses an immersive developer/security aesthetic with animated SVG circuitry, terminal/code panels, ethical-security lock visuals, moving network paths, parallax motion, glassmorphism, responsive layouts and interactive project cards. It also includes a dedicated **Freelance Full Stack Developer** experience entry.
 
 ## Selected Projects
 
 | Project | Type | Live | Repository |
 |---|---|---|---|
-| **DaggWorld Business OS** | Full Stack / Firebase | [Open](https://daggworld-business-toolkit.web.app/) | [Repo](https://github.com/Dagg12/daggworld-business-os) |
+| **DaggWorld Business OS** | Full Stack / Business Platform | [Open](https://daggworld-business-toolkit.web.app/) | [Repo](https://github.com/Dagg12/daggworld-business-os) |
+| **THAMAS TECH WORLD — Business Portfolio** | Business / Technology Services | [Open](https://dagg12.github.io/Thamas-portfolio/) | [Repo](https://github.com/Dagg12/Thamas-portfolio) |
 | **Nare & Philippine — Fragrance House** | Client / React | [Open](https://dagg12.github.io/Philippine-website/) | [Repo](https://github.com/Dagg12/Philippine-website) |
 | **Centalytics** | Healthcare / Firebase | [Open](https://centalytics-cef6c.web.app) | [Repo](https://github.com/Dagg12/Centalytics) |
 | **The Ranger** | ASP.NET / MySQL | — | [Repo](https://github.com/Dagg12/Ranger-Management-Sytem) |
 | **Naledi Nail Studio** | Client / Web | [Open](https://dagg12.github.io/Naledi-Portfolio-/) | [Repo](https://github.com/Dagg12/Naledi-Portfolio-) |
 | **Clinical Blood Bank** | ASP.NET / MySQL | — | [Repo](https://github.com/TeeCee07/ClinicalBloodBank) |
 
-> The former car-rental project has been removed from the portfolio showcase so the project section reflects current, relevant work.
+The former **Personal Portfolio** project card has been removed from the showcased projects. The portfolio is the site itself, not a separate project entry.
 
 ---
 
 ## Technology Stack
 
 **Frontend:** HTML5, CSS3, JavaScript, React, Vite, Tailwind CSS  
-**Backend & Cloud:** Node.js, Firebase, ASP.NET  
+**Backend & Frameworks:** Node.js, Firebase, ASP.NET, REST APIs  
 **Languages:** Java, C#, C++, Python, JavaScript, SQL  
-**Data:** MySQL, Oracle Database, Firebase  
-**Infrastructure:** Git, GitHub, Linux, Cisco Packet Tracer, Networking  
-**Security:** Kali Linux, ethical hacking fundamentals, network security  
-**AI:** Generative AI, automation and intelligent application exploration
+**Databases:** MySQL, Oracle Database, Firebase / Firestore  
+**Infrastructure:** Git, GitHub, Linux, Bash, GitHub Pages, Firebase Hosting  
+**Networking:** Cisco Packet Tracer, computer networks, network configuration and troubleshooting  
+**Security:** Kali Linux, ethical hacking fundamentals, security testing, network security, system hardening  
+**Tools & AI:** VS Code, Visual Studio, generative AI, automation and intelligent application exploration
 
-The stack is aligned with the technologies presented in the Dagg12 GitHub profile. 
+The interactive Technology Universe on the live portfolio presents these skills as animated cards rather than a static list.
 
 ---
 
 ## Key Features
 
-- Animated hero and matrix background
-- Typed developer roles
+- Animated SVG ethical-hacker / programmer background
+- Moving network paths, nodes, terminal panels and code streams
+- Mouse parallax across the cyber background
+- Typed developer roles including Freelance Developer
 - Dark/light theme persistence
 - Interactive project filtering
 - 3D project-card hover interactions
-- Technology universe cards with icons
-- Scroll progress indicator
+- Technology Universe with the full stack
+- Scroll progress glow
 - AOS reveal animations
 - Responsive navigation and mobile layout
 - Animated counters
@@ -76,7 +80,7 @@ No build step is required for the current static portfolio.
 
 **Vhukhudo Kevin Thamaga**  
 **Dagg12**  
-Software Developer · Full-Stack Developer · Network & IT Technician
+Software Developer · Full-Stack Developer · Freelance Developer · Network & IT Technician
 
 Portfolio: https://dagg12.github.io/Portfolio-Website/  
 GitHub: https://github.com/Dagg12
