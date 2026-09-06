@@ -1,197 +1,21 @@
-/* Dagg12 Portfolio — FINAL SECTION + DESIGN RELIABILITY LAYER */
+/* Dagg12 Portfolio — authoritative runtime fix */
 (() => {
   'use strict';
-
-  const DESIGN_FILES = [
-    'DV01.png', 'DV02.png', 'DV03.png', 'DV04.png', 'DaggWorld....png',
-    'V2.jpg', 'Veracity (1).png', 'Veracity.png', 'er (1).png', 'v1.jpg'
-  ];
-
-  const sectionIds = ['home','about','skills','projects','design','experience','education','certificates','contact'];
-
-  const reveal = () => {
-    document.querySelectorAll('[data-aos]').forEach(el => {
-      el.style.opacity = '1';
-      el.style.visibility = 'visible';
-      el.style.transform = 'none';
-    });
-    document.querySelectorAll('main > section, .section, .hero-section').forEach(el => {
-      el.style.visibility = 'visible';
-      el.style.opacity = '1';
-    });
-  };
-
-  const injectStyles = () => {
-    if (document.getElementById('d12-final-fix-style')) return;
-    const s = document.createElement('style');
-    s.id = 'd12-final-fix-style';
-    s.textContent = `
-      #design{display:block!important;visibility:visible!important;opacity:1!important;position:relative;z-index:2;padding-top:110px;padding-bottom:110px}
-      #design .d12-final-shell{display:block!important;visibility:visible!important;opacity:1!important}
-      .d12-final-gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;margin-top:32px}
-      .d12-final-card{grid-column:span 4;min-height:260px;position:relative;overflow:hidden;border:1px solid rgba(97,243,255,.18);border-radius:22px;background:#050b14;box-shadow:0 24px 70px rgba(0,0,0,.38);cursor:pointer;transition:transform .4s ease,border-color .4s ease,box-shadow .4s ease}
-      .d12-final-card:nth-child(1),.d12-final-card:nth-child(5){grid-column:span 6;min-height:390px}
-      .d12-final-card:hover{transform:translateY(-8px);border-color:rgba(97,243,255,.55);box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 40px rgba(97,243,255,.1)}
-      .d12-final-card img{width:100%;height:100%;min-height:inherit;display:block;object-fit:cover;transition:transform .8s ease,filter .5s ease}
-      .d12-final-card:hover img{transform:scale(1.06);filter:saturate(1.1) contrast(1.05)}
-      .d12-final-card:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 42%,rgba(0,3,10,.94));pointer-events:none}
-      .d12-final-meta{position:absolute;z-index:2;left:20px;right:20px;bottom:17px;color:#fff}
-      .d12-final-meta small{display:block;color:#61f3ff;font:700 10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.15em;text-transform:uppercase;margin-bottom:5px}
-      .d12-final-meta strong{font-size:18px;letter-spacing:-.02em}
-      .d12-final-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(97,243,255,.18);border-radius:999px;background:rgba(1,7,15,.6);color:#61f3ff;font:700 10px ui-monospace,monospace;letter-spacing:.08em}
-      .d12-final-empty{padding:35px;border:1px dashed rgba(97,243,255,.25);border-radius:20px;text-align:center;color:rgba(255,255,255,.6)}
-      .d12-lightbox{position:fixed;inset:0;z-index:10000;display:none;place-items:center;padding:24px;background:rgba(0,0,0,.9);backdrop-filter:blur(18px)}
-      .d12-lightbox.open{display:grid}
-      .d12-lightbox figure{margin:0;width:min(1200px,94vw);max-height:94vh;position:relative;border:1px solid rgba(97,243,255,.3);border-radius:22px;overflow:hidden;background:#02060d;box-shadow:0 50px 160px rgba(0,0,0,.85)}
-      .d12-lightbox img{display:block;width:100%;height:auto;max-height:82vh;object-fit:contain}
-      .d12-lightbox figcaption{padding:12px 16px;color:rgba(255,255,255,.7);font:700 11px ui-monospace,monospace}
-      .d12-lightbox button{position:absolute;right:12px;top:12px;width:42px;height:42px;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:rgba(0,0,0,.7);color:#fff;font-size:18px;cursor:pointer}
-      #experience .timeline-title{font-size:1.25rem!important}
-      .d12-final-experience-note{margin-top:12px;padding:14px 16px;border-left:2px solid #61f3ff;background:rgba(97,243,255,.045);color:rgba(255,255,255,.62);line-height:1.7;font-size:.9rem}
-      @media(max-width:900px){.d12-final-card,.d12-final-card:nth-child(1),.d12-final-card:nth-child(5){grid-column:span 6;min-height:300px}}
-      @media(max-width:620px){.d12-final-gallery{grid-template-columns:1fr}.d12-final-card,.d12-final-card:nth-child(1),.d12-final-card:nth-child(5){grid-column:span 1;min-height:340px}}
-      body.light-mode .d12-final-card{background:#f7fbfe;border-color:rgba(20,120,150,.18)}
-      body.light-mode .d12-final-meta{color:#07121e}
-    `;
-    document.head.appendChild(s);
-  };
-
-  const makeDesign = () => {
-    let section = document.getElementById('design');
-    if (section) section.remove();
-
-    const projects = document.getElementById('projects');
-    if (!projects?.parentNode) return;
-
-    section = document.createElement('section');
-    section.id = 'design';
-    section.className = 'section design-section';
-    section.setAttribute('aria-label', 'Design Studio');
-    section.innerHTML = `
-      <div class="container d12-final-shell">
-        <div class="section-header" data-aos="fade-up">
-          <span class="section-tag">Design Studio</span>
-          <h2 class="section-title">Visual <span class="highlight">Work</span></h2>
-          <div class="section-divider"></div>
-          <p style="max-width:760px;margin:16px auto 0;color:var(--text-secondary,#8fa1b5);line-height:1.8">Visual work, not just code. Explore posters, branding, creative campaigns and digital design created by Dagg12.</p>
-          <div style="margin-top:18px"><span class="d12-final-badge"><i class="fas fa-layer-group"></i> 10 ORIGINAL WORKS FROM THE DESIGN ARCHIVE</span></div>
-        </div>
-        <div class="d12-final-gallery" id="d12FinalGallery"></div>
-      </div>`;
-    projects.parentNode.insertBefore(section, projects);
-
-    const gallery = section.querySelector('#d12FinalGallery');
-    DESIGN_FILES.forEach((file, index) => {
-      const card = document.createElement('article');
-      card.className = 'd12-final-card';
-      const src = 'assets/images/designs/' + file.split('/').map(encodeURIComponent).join('/');
-      card.innerHTML = `<img src="${src}" alt="${file.replace(/\.[^.]+$/, '')} — design work" loading="lazy"><div class="d12-final-meta"><small>Design Studio · ${String(index + 1).padStart(2,'0')}</small><strong>${file.replace(/\.[^.]+$/, '')}</strong></div>`;
-      card.addEventListener('click', () => openLightbox(src, file));
-      gallery.appendChild(card);
-    });
-
-    setTimeout(() => {
-      gallery.querySelectorAll('img').forEach(img => {
-        img.addEventListener('error', () => {
-          img.closest('.d12-final-card')?.remove();
-        });
-      });
-      reveal();
-    }, 50);
-  };
-
-  const openLightbox = (src, title) => {
-    let box = document.getElementById('d12Lightbox');
-    if (!box) {
-      box = document.createElement('div');
-      box.id = 'd12Lightbox';
-      box.className = 'd12-lightbox';
-      box.innerHTML = '<figure><button type="button" aria-label="Close design preview">×</button><img alt=""><figcaption></figcaption></figure>';
-      document.body.appendChild(box);
-      box.querySelector('button').addEventListener('click', () => box.classList.remove('open'));
-      box.addEventListener('click', e => { if (e.target === box) box.classList.remove('open'); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') box.classList.remove('open'); });
-    }
-    box.querySelector('img').src = src;
-    box.querySelector('img').alt = title;
-    box.querySelector('figcaption').textContent = title;
-    box.classList.add('open');
-  };
-
-  const ensureDesignNav = () => {
-    const nav = document.querySelector('.nav-links');
-    if (!nav) return;
-    let link = nav.querySelector('a[href="#design"]');
-    if (!link) {
-      const li = document.createElement('li');
-      li.setAttribute('role','none');
-      li.innerHTML = '<a href="#design" role="menuitem">Design</a>';
-      const experience = nav.querySelector('a[href="#experience"]')?.parentElement;
-      experience ? nav.insertBefore(li, experience) : nav.appendChild(li);
-      link = li.querySelector('a');
-    }
-  };
-
-  const fixExperience = () => {
-    // Remove the extra generated experience card that used the wrong title.
-    document.querySelectorAll('*').forEach(el => {
-      if (el.children.length === 0 && el.textContent.trim() === 'Freelance Full-Stack Developer & Designer') {
-        const removable = el.closest('.experience-upgrade-card');
-        if (removable) removable.remove();
-        else el.textContent = 'Freelance IT Technician';
-      }
-    });
-
-    const title = document.querySelector('#experience .timeline-title');
-    if (title) title.textContent = 'Freelance IT Technician';
-
-    const timeline = document.querySelector('#experience .timeline-content');
-    if (timeline && !timeline.querySelector('.d12-final-experience-note')) {
-      const note = document.createElement('div');
-      note.className = 'd12-final-experience-note';
-      note.innerHTML = '<strong>Freelance IT Technician</strong> — providing practical IT support, computer repair and troubleshooting, Wi-Fi/network installation and configuration, website development and hosting, CCTV configuration, and technical consulting.';
-      timeline.appendChild(note);
-    }
-  };
-
-  const navigation = () => {
-    const links = [...document.querySelectorAll('.nav-links a[href^="#"]')];
-    links.forEach(link => {
-      link.addEventListener('click', event => {
-        const target = document.getElementById(link.getAttribute('href').slice(1));
-        if (!target) return;
-        event.preventDefault();
-        target.scrollIntoView({behavior:'smooth', block:'start'});
-        history.replaceState(null,'',link.getAttribute('href'));
-        document.getElementById('navLinks')?.classList.remove('active');
-        document.getElementById('hamburger')?.setAttribute('aria-expanded','false');
-      });
-    });
-  };
-
-  const boot = () => {
-    injectStyles();
-    makeDesign();
-    ensureDesignNav();
-    fixExperience();
-    reveal();
-    navigation();
-
-    if (window.AOS?.init) {
-      window.AOS.init({duration:850,easing:'ease-out-cubic',once:true,offset:70});
-      setTimeout(reveal, 1000);
-    }
-
-    const loader = document.getElementById('preloader');
-    if (loader) {
-      loader.classList.add('hidden');
-      setTimeout(() => loader.classList.add('hidden'), 1500);
-    }
-
-    // Final visibility guard for slow CDN/network conditions.
-    setTimeout(reveal, 2500);
-  };
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once:true});
-  else boot();
+  const DESIGN_FILES=['DV01.png','DV02.png','DV03.png','DV04.png','DaggWorld....png','V2.jpg','Veracity (1).png','Veracity.png','er (1).png','v1.jpg'];
+  const css=()=>{if(document.getElementById('d12-runtime-style'))return;const s=document.createElement('style');s.id='d12-runtime-style';s.textContent=`
+#design{display:block!important;visibility:visible!important;opacity:1!important;position:relative;z-index:2;padding:110px 0}
+.d12-gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:30px}.d12-art{grid-column:span 3;min-height:250px;position:relative;overflow:hidden;border:1px solid rgba(97,243,255,.18);border-radius:22px;background:#050b14;cursor:pointer;box-shadow:0 24px 70px rgba(0,0,0,.4);transition:.4s}.d12-art:nth-child(1),.d12-art:nth-child(6){grid-column:span 6;min-height:380px}.d12-art:hover{transform:translateY(-8px);border-color:rgba(97,243,255,.55)}.d12-art img{width:100%;height:100%;min-height:inherit;display:block;object-fit:cover;transition:.8s}.d12-art:hover img{transform:scale(1.07)}.d12-art:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,3,10,.95));pointer-events:none}.d12-art-meta{position:absolute;z-index:2;left:18px;right:18px;bottom:16px;color:#fff}.d12-art-meta small{display:block;color:#61f3ff;font:700 10px ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}.d12-art-meta strong{font-size:17px}.d12-modal{position:fixed;inset:0;z-index:10000;display:none;place-items:center;padding:24px;background:rgba(0,0,0,.9);backdrop-filter:blur(18px)}.d12-modal.open{display:grid}.d12-modal figure{position:relative;width:min(1200px,94vw);margin:0;max-height:94vh;border:1px solid rgba(97,243,255,.3);border-radius:22px;overflow:hidden;background:#02060d}.d12-modal img{display:block;width:100%;max-height:82vh;object-fit:contain}.d12-modal figcaption{padding:12px 16px;color:#aaa;font:700 11px ui-monospace,monospace}.d12-close{position:absolute;right:12px;top:12px;width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.75);color:#fff;border:1px solid #555;font-size:20px;z-index:2}
+#contact .contact-item{display:flex!important;align-items:center!important;gap:16px!important;visibility:visible!important;opacity:1!important}#contact .contact-item>i{display:grid!important;place-items:center!important;flex:0 0 54px!important;width:54px!important;height:54px!important;border-radius:16px!important;color:#61f3ff!important;font-size:1.25rem!important;background:linear-gradient(145deg,rgba(97,243,255,.14),rgba(52,140,255,.07))!important;border:1px solid rgba(97,243,255,.25)!important;box-shadow:0 0 24px rgba(97,243,255,.08)!important;visibility:visible!important;opacity:1!important}.contact-socials a{display:grid!important;place-items:center!important}.d12-complete-stack{margin-top:40px;padding:22px;border:1px solid rgba(97,243,255,.15);border-radius:28px;background:linear-gradient(145deg,rgba(7,18,31,.9),rgba(1,6,14,.82));box-shadow:0 30px 100px rgba(0,0,0,.35)}.d12-stack-heading{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:20px}.d12-stack-kicker{font:700 10px ui-monospace,monospace;letter-spacing:.16em;color:#61f3ff}.d12-stack-heading h3{margin:6px 0;font-size:clamp(1.6rem,3vw,2.5rem)}.d12-stack-heading p{max-width:500px;margin:0;color:#8091a5;font:600 11px/1.6 ui-monospace,monospace}.d12-stack-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.d12-stack-group{padding:17px;border:1px solid rgba(255,255,255,.08);border-radius:20px;background:rgba(0,4,10,.48)}.d12-stack-group h4{display:flex;align-items:center;gap:9px;margin:0 0 13px;color:#fff}.d12-stack-group h4 i,.d12-stack-chip i{color:#61f3ff}.d12-stack-items{display:flex;flex-wrap:wrap;gap:8px}.d12-stack-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);color:#b9c5d1;font:600 10px ui-monospace,monospace}.d12-stack-chip:hover{border-color:rgba(97,243,255,.35);color:#fff}.d12-experience-note{margin-top:14px;padding:14px 16px;border-left:2px solid #61f3ff;background:rgba(97,243,255,.04);color:#8294a7;line-height:1.7;font-size:.9rem}@media(max-width:760px){.d12-gallery{grid-template-columns:1fr}.d12-art,.d12-art:nth-child(1),.d12-art:nth-child(6){grid-column:span 1;min-height:330px}.d12-stack-groups{grid-template-columns:1fr}.d12-stack-heading{display:block}.d12-stack-heading p{margin-top:10px}}
+`;document.head.appendChild(s)};
+  const reveal=()=>document.querySelectorAll('[data-aos],main>section,.section,.hero-section').forEach(e=>{e.style.visibility='visible';e.style.opacity='1';if(e.hasAttribute('data-aos'))e.style.transform='none'});
+  const design=()=>{let old=document.getElementById('design');if(old)old.remove();const projects=document.getElementById('projects');if(!projects?.parentNode)return;const sec=document.createElement('section');sec.id='design';sec.className='section design-section';sec.innerHTML=`<div class="container"><div class="section-header"><span class="section-tag">Design Studio</span><h2 class="section-title">Visual <span class="highlight">Work</span></h2><div class="section-divider"></div><p>Visual work, not just code. Posters, branding, creative campaigns and digital design from the real Dagg12 design archive.</p></div><div class="d12-gallery"></div></div>`;projects.parentNode.insertBefore(sec,projects);const g=sec.querySelector('.d12-gallery');DESIGN_FILES.forEach((file,i)=>{const c=document.createElement('article');c.className='d12-art';const src='assets/images/designs/'+file.split('/').map(encodeURIComponent).join('/');c.innerHTML=`<img src="${src}" alt="${file}" loading="lazy"><div class="d12-art-meta"><small>Design Studio · ${String(i+1).padStart(2,'0')}</small><strong>${file.replace(/\.[^.]+$/,'')}</strong></div>`;c.onclick=()=>lightbox(src,file);g.appendChild(c)})};
+  const lightbox=(src,title)=>{let b=document.getElementById('d12Modal');if(!b){b=document.createElement('div');b.id='d12Modal';b.className='d12-modal';b.innerHTML='<figure><button class="d12-close" aria-label="Close">×</button><img><figcaption></figcaption></figure>';document.body.appendChild(b);b.querySelector('.d12-close').onclick=()=>b.classList.remove('open');b.onclick=e=>{if(e.target===b)b.classList.remove('open')};document.addEventListener('keydown',e=>e.key==='Escape'&&b.classList.remove('open'))}b.querySelector('img').src=src;b.querySelector('figcaption').textContent=title;b.classList.add('open')};
+  const nav=()=>{const n=document.querySelector('.nav-links');if(n&&!n.querySelector('a[href="#design"]')){const li=document.createElement('li');li.innerHTML='<a href="#design">Design</a>';const x=n.querySelector('a[href="#experience"]')?.parentElement;x?n.insertBefore(li,x):n.appendChild(li)}document.querySelectorAll('.nav-links a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.getElementById(a.getAttribute('href').slice(1));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});document.getElementById('navLinks')?.classList.remove('active')}}))};
+  const experience=()=>{const t=document.querySelector('#experience .timeline-title');if(t)t.textContent='Freelance IT Technician';const x=document.querySelector('#experience .timeline-content');if(x&&!x.querySelector('.d12-experience-note')){const n=document.createElement('div');n.className='d12-experience-note';n.innerHTML='<strong>Freelance IT Technician</strong> — computer repair and troubleshooting, WiFi/network installation and configuration, website development and hosting, CCTV configuration and technical support.';x.appendChild(n)}};
+  const stack=()=>{if(document.getElementById('d12CompleteStack'))return;const container=document.querySelector('#skills .container');if(!container)return;const groups=[['Frontend','HTML5','CSS3','JavaScript','React','Responsive UI/UX','AOS / Typed.js'],['Backend & Application','Node.js','Java','C#','C++','Python','ASP.NET'],['Databases','MySQL','Oracle Database','Firebase / Firestore','SQL','MySQL Workbench'],['Networking','Cisco Packet Tracer','Computer Networks','DHCP / DNS','Routing & Switching','Network Configuration','Network Troubleshooting'],['Infrastructure & DevOps','Git','GitHub','Linux','Bash','GitHub Pages','Firebase Hosting'],['Security','Kali Linux','Ethical Hacking Fundamentals','Security Testing','Network Security','System Hardening'],['Tools & AI','VS Code','Visual Studio','Generative AI','Automation','Intelligent Application Exploration'],['Design & Creative','Poster Design','Logo Design','Brand Identity','Visual Design','Creative Direction','Clothing Brand Design']];const box=document.createElement('div');box.id='d12CompleteStack';box.className='d12-complete-stack';box.innerHTML='<div class="d12-stack-heading"><div><div class="d12-stack-kicker">D12 / TECHNOLOGY ARSENAL</div><h3>Complete Tech Stack</h3></div><p>Software development, databases, networking, infrastructure, security, AI and creative design.</p></div><div class="d12-stack-groups"></div>';const icon=n=>{n=n.toLowerCase();if(n.includes('html'))return'fab fa-html5';if(n.includes('css'))return'fab fa-css3-alt';if(n.includes('javascript'))return'fab fa-js';if(n.includes('react'))return'fab fa-react';if(n.includes('node'))return'fab fa-node-js';if(n.includes('python'))return'fab fa-python';if(n.includes('java'))return'fab fa-java';if(n.includes('git'))return'fab fa-git-alt';if(n.includes('github'))return'fab fa-github';if(n.includes('linux')||n.includes('bash'))return'fab fa-linux';if(n.includes('network')||n.includes('cisco')||n.includes('routing')||n.includes('dhcp')||n.includes('dns'))return'fas fa-network-wired';if(n.includes('security')||n.includes('kali')||n.includes('hacking')||n.includes('hardening'))return'fas fa-shield-halved';if(n.includes('design')||n.includes('logo')||n.includes('poster')||n.includes('brand')||n.includes('creative'))return'fas fa-pen-nib';if(n.includes('ai')||n.includes('automation')||n.includes('intelligent'))return'fas fa-brain';if(n.includes('database')||n.includes('sql')||n.includes('mysql')||n.includes('oracle')||n.includes('firestore'))return'fas fa-database';return'fas fa-code'};const gs=box.querySelector('.d12-stack-groups');groups.forEach(g=>{const c=document.createElement('article');c.className='d12-stack-group';c.innerHTML=`<h4><i class="${icon(g[0])}"></i>${g[0]}</h4><div class="d12-stack-items"></div>`;g.slice(1).forEach(v=>{const chip=document.createElement('span');chip.className='d12-stack-chip';chip.innerHTML=`<i class="${icon(v)}"></i>${v}`;c.querySelector('.d12-stack-items').appendChild(chip)});gs.appendChild(c)});container.appendChild(box)};
+  const contact=()=>document.querySelectorAll('#contact .contact-item').forEach((x,i)=>{let ic=x.querySelector(':scope>i');if(!ic){ic=document.createElement('i');ic.className=['fas fa-envelope','fas fa-phone','fab fa-linkedin','fab fa-github'][i]||'fas fa-address-card';x.prepend(ic)}ic.style.display='grid';ic.style.visibility='visible';ic.style.opacity='1'});
+  const certificate=()=>document.querySelectorAll('#certificates .certificate-card').forEach(c=>{if(!/Cisco Networking Certificate/i.test(c.textContent))c.remove()});
+  const loadIntegrity=()=>{if(document.getElementById('d12IntegrityLoader'))return;const s=document.createElement('script');s.id='d12IntegrityLoader';s.src='site-integrity.js?v=20260906-integrity';document.body.appendChild(s)};
+  const boot=()=>{css();design();nav();experience();stack();contact();certificate();reveal();loadIntegrity();setTimeout(reveal,1500);if(window.AOS?.refresh)window.AOS.refresh()};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
